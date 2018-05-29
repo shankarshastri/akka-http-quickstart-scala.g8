@@ -1,7 +1,11 @@
+import com.typesafe.sbt.packager.docker._
+
 lazy val akkaHttpVersion = "$akka_http_version$"
 lazy val akkaVersion    = "$akka_version$"
 
 dockerBaseImage := "openjdk:jre-alpine"
+dockerExposedPorts := Seq(8080)
+dockerCommands += Cmd("ENV", "bindingAddress", "0.0.0.0")
 lazy val root = (project in file(".")).
   settings(
     inThisBuild(List(
